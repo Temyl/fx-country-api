@@ -20,6 +20,9 @@ export function createDBConnection(): Knex {
       user: DB_USER,
       password: DB_PASSWORD,
       database: DB_DATABASE,
+      ssl: {
+        rejectUnauthorized: false
+      }
     },
     pool: { min: 0, max: 10 },
   });
