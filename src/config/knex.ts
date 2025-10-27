@@ -4,13 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export function createDBConnection(): Knex {
-  const {
-    DB_HOST,
-    DB_PORT,
-    DB_DATABASE,
-    DB_USER,
-    DB_PASSWORD,
-  } = process.env;
+  const { DB_HOST, DB_PORT, DB_DATABASE, DB_USER, DB_PASSWORD } = process.env;
 
   const db = knex({
     client: "mysql2",
@@ -20,17 +14,15 @@ export function createDBConnection(): Knex {
       user: DB_USER,
       password: DB_PASSWORD,
       database: DB_DATABASE,
-      ssl: {
-        rejectUnauthorized: false
-      }
+      ssl: { rejectUnauthorized: false },
     },
     pool: { min: 0, max: 10 },
   });
 
-   db.raw("SELECT 1")
-    .then(() => console.log(" Database connected successfully"))
+  db.raw("SELECT 1")
+    .then(() => console.log("Database connected successfully"))
     .catch((err) => {
-      console.error(" Database connection failed:", err.message);
+      console.error(" Database connection failed:", err); 
       process.exit(1);
     });
 
