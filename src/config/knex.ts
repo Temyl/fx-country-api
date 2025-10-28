@@ -6,6 +6,7 @@ dotenv.config();
 export function createDBConnection(): Knex {
   const { DB_HOST, DB_PORT, DB_DATABASE, DB_USER, DB_PASSWORD } = process.env;
 
+  console.log( DB_DATABASE, DB_HOST, DB_PORT, DB_PASSWORD);
   const db = knex({
     client: "mysql2",
     connection: {
@@ -19,7 +20,7 @@ export function createDBConnection(): Knex {
     pool: { min: 0, max: 10 },
   });
 
-  console.log( DB_DATABASE, DB_HOST, DB_PORT, DB_PASSWORD);
+  
 
   db.raw("SELECT 1")
     .then(() => console.log("Database connected successfully"))
