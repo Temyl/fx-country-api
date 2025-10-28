@@ -1,7 +1,11 @@
 import knex, { Knex } from "knex";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 
-dotenv.config();
+// dotenv.config();
+
+if (process.env.NODE_ENV !== "production") {
+  import("dotenv").then(dotenv => dotenv.config());
+}
 
 export function createDBConnection(): Knex {
   const { DB_HOST, DB_PORT, DB_DATABASE, DB_USER, DB_PASSWORD } = process.env;
